@@ -1,0 +1,7 @@
+Model,Number of inliers,Number of outliers
+ABOD,1300,0
+KNN,1132,168
+LOF,1150,150
+One-Class SVM,1146,154
+Isolation Forest,1135,165
+Feature Bagging,1131,169
