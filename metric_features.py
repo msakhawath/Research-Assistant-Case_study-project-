@@ -72,6 +72,9 @@ results_combined['Features'] = results_combined['Dataset'].map({
 melted_results = pd.melt(results_combined, id_vars=['Model', 'Dataset', 'Features'], var_name='Metric', value_name='Value')
 
 # Function to plot correlation
+# ... [previous code remains the same]
+
+# Function to plot correlation with fixed scale for both axes
 def plot_correlation(data, x_metric, y_metric, title):
     # Filter data for the two metrics
     filtered_data = data[data['Metric'].isin([x_metric, y_metric])]
@@ -82,9 +85,14 @@ def plot_correlation(data, x_metric, y_metric, title):
     # Plot
     sns.scatterplot(data=pivot_data, x=x_metric, y=y_metric, hue='Dataset')
     plt.title(f'{title}\nSpearman Correlation: {correlation:.2f}')
+
+    # Set fixed scale from 0.7 to 1.0 for x and y axes
+    plt.xlim(0.1, 1.0)
+    plt.ylim(0.1, 1.0)
     plt.show()
 
 # Plot correlations against number of features
 plot_correlation(melted_results, 'ROC AUC', 'PR AUC', 'ROC AUC vs PR AUC (Features)')
 plot_correlation(melted_results, 'ROC AUC', 'F1 Score', 'ROC AUC vs F1 Score (Features)')
 plot_correlation(melted_results, 'PR AUC', 'F1 Score', 'PR AUC vs F1 Score (Features)')
+
